@@ -27,6 +27,7 @@
 This repo contains my personal HA configuration, which including:
 
 - Devices
+
  - Mi Flora Sensor
  - Xiaomi Gateway & Zigbee devices
  - ASUS router
@@ -35,11 +36,12 @@ This repo contains my personal HA configuration, which including:
  - VLC
 
 - Customization
+
  - Localization of entity & attribute
  - Some dark themes (from community)
  - Use of different kinds of Template
  
- - Floorplan
+- Floorplan
   The Floorplan shows information of :
   Temp&Humidity indoors, State of PS4 and Games' name playing, State of switches and light, Presence Detection, State of Flowers, Dynamic moon phrase and Scenes.
  

@@ -1,0 +1,223 @@
+/* SVG shapes */
+
+svg, svg * {
+  vector-effect: non-scaling-stroke !important;
+  pointer-events: all !important;
+}
+
+/* Hover over */
+
+.entity:hover {
+  stroke: #03A9F4 !important;
+  stroke-width: 1px !important;
+  stroke-opacity: 1 !important;
+}
+
+/* Bootstrap succsss */
+
+.success-text {
+  fill: #3c763d !important;
+}
+
+.success-background, .success-text-background {
+  fill: #dff0d8 !important;
+  fill-opacity: 1 !important;
+  stroke: #d6e9c6 !important;
+  stroke-width: 1px !important;
+}
+
+/* Bootstrap info */
+
+.info-text {
+  fill: #31708f !important;
+}
+
+.info-background, .info-text-background {
+  fill: #B8B8B8 !important;
+  fill-opacity: 1 !important;
+  stroke: #B8B8B8 !important;
+  stroke-width: 1px !important;
+}
+
+/* Bootstrap warning */
+
+.warning-text {
+  fill: #8a6d3b !important;
+}
+
+.warning-background, .warning-text-background  {
+  fill: #FF0033 !important;
+  fill-opacity: 1 !important;
+  stroke: #FF0033 !important;
+  stroke-width: 1px !important;
+}
+
+/* Bootstrap danger */
+
+.danger-text {
+  fill: #a94442 !important;
+}
+
+.danger-background, .danger-text-background {
+  fill: #f2dede !important;
+  fill-opacity: 1 !important;
+  stroke: #ebccd1 !important;
+  stroke-width: 1px !important;
+}
+
+/* Last motion entity */
+
+.last-motion {
+  stroke: #808080 !important;
+  stroke-width: 1px !important;
+  stroke-opacity: 1 !important;
+}
+
+/* Alarm Panel */
+
+.alarm-disarmed {
+  fill: #3c763d !important;
+}
+
+.alarm-armed {
+  fill: #8a6d3b !important;
+}
+
+/* Camera */
+
+.camera-idle {
+/*  fill: #B9CEF7 !important; */
+  fill: #6FAECE !important;
+}
+
+/* 灯 */
+
+.light-off {
+  fill: #6C7B8B !important;
+}
+
+.light-on {
+  opacity: 1 !important;
+}
+
+
+/* 温度传感器 */
+
+.temp-low {
+  fill: #0066FF !important;
+  fill-opacity: 1 !important;
+}
+
+.temp-average {
+  fill: #fff !important;
+  fill-opacity: 1 !important;
+}
+
+.temp-high {
+  fill: #FF6633 !important;
+  fill-opacity: 1 !important;
+}
+
+/* Humidity sensor */
+
+.hum-low {
+  fill: #FF9933 !important;
+  fill-opacity: 1 !important;
+}
+
+.hum-average {
+  fill: #fff !important;
+  fill-opacity: 1 !important;
+}
+
+.hum-high {
+  fill: #0033FF !important;
+  fill-opacity: 1 !important;
+}
+
+/* Illumination sensor */
+
+.lux-low {
+  fill: #000000 !important;
+  fill-opacity: 1 !important;
+}
+
+.lux-average {
+  fill: #fff !important;
+  fill-opacity: 1 !important;
+}
+
+.lux-high {
+  fill: #FFFF00 !important;
+  fill-opacity: 1 !important;
+}
+
+/* 魔镜 */
+
+.mirror-off {
+  fill: #6C7B8B !important;
+}
+
+.mirror-on {
+  opacity: 1 !important;
+}
+
+/* 空调动画 */
+@keyframes mymove {
+  50% { opacity: 0; }
+}
+
+@-webkit-keyframes mymove {
+  50% { opacity: 0; }
+}
+
+.ac-off {
+  opacity: 1 !important;
+}
+
+.ac-on {
+  position: relative !important;
+  animation: mymove 3s infinite ease !important;
+  -webkit-animation: mymove 3s infinite ease !important;
+}
+
+/* 设备状态 */
+.at-home {
+  fill: #a3cf62 !important;
+}
+.away {
+  fill: #FF0033 !important;
+}
+
+/* PS4 */
+.ps4-off {
+  fill: #6C7B8B !important;
+}
+
+.ps4-on {
+  opacity: 1 !important;
+}
+
+.ps4-playing {
+  fill: #FF0033 !important;
+}
+
+/* 显示屏 */
+.screen {
+  font-size: 20px !important;
+  fill: white !important;
+  position: relative !important;
+  animation: mymove 10s infinite ease !important;
+  -webkit-animation: mymove 10s infinite ease !important;
+}
+
+/* 盆栽 */
+.healthy {
+  opacity: 1 !important;
+}
+
+.unhealthy {
+  fill: #FF0033 !important
+  animation: mymove 4s infinite ease !important;
+  -webkit-animation: mymove 4s infinite ease !important;
+}

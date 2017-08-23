@@ -1,0 +1,377 @@
+homeassistant:
+  # 系统名称，金窝银窝随便取
+  name: 家
+  # 经纬度设置
+  latitude: 24.4798
+  longitude: 118.0819
+  # 海拔
+  elevation: 11
+  # 度量单位，这里选择“米”
+  unit_system: metric
+  # 时区
+  time_zone: Asia/Shanghai
+  # 设备昵称
+  customize:
+    binary_sensor.motion_sensor_158d000155b4be:
+      friendly_name: 人体传感器
+    light.gateway_light_f0b429b43088:
+      friendly_name: 网关灯
+    sensor.humidity_158d00010e50d7:
+      friendly_name: 湿度
+      icon: mdi:water
+    sensor.temperature_158d00010e50d7:
+      friendly_name: 温度
+    sun.sun:
+      hidden: true
+    sensor.moon:
+      friendly_name: 月亮
+      icon: mdi:brightness-2
+      hidden: true
+    sensor.moon_state: 
+      icon: mdi:brightness-2
+    sensor.illumination_f0b429b43088:
+      friendly_name: 亮度
+      homebridge_sensor_type: light
+      homebridge_hidden: true
+    switch.plug_158d00011c85e2:
+      friendly_name: 魔镜 
+      icon: mdi:glassdoor   
+    sensor.tide:
+      friendly_name: 潮汐
+      icon: mdi:waves
+    sensor.sun_state:
+      icon: mdi:white-balance-sunny
+    sensor.coconut_temperature: 
+      friendly_name: 室外温度
+      homebridge_hidden: true
+    sensor.coconut_light_intensity:
+      friendly_name: 室外光照
+      homebridge_hidden: true
+    sensor.games:
+      icon: mdi:gamepad-variant
+    sensor.coconut_battery:
+      hidden: true
+    sensor.coconut_moisture:
+      friendly_name: 土壤湿度
+      icon: mdi:cup-water
+    sensor.coconut_conductivity:
+      friendly_name: 土壤肥力
+      icon: mdi:flower
+    scene.sleep:
+      friendly_name: 晚安
+      icon: mdi:sleep
+    scene.exit:
+      friendly_name: 离开
+      icon: mdi:logout
+    light.yeelight_strip_286c072f6ce6:
+      friendly_name: 灯带
+      homebridge_hidden: true
+    media_player.playstation_4:
+      homebridge_hidden: true
+    media_player.speaker_1:
+      friendly_name: 喇叭
+      homebridge_hidden: true
+    binary_sensor.plant_fertility:
+      hidden: true
+    binary_sensor.plant_moisture:
+      hidden: true
+    binary_sensor.co:
+      hidden: true
+      homebridge_hidden: False
+    sensor.iphone_7_battery_level:
+      hidden: true
+    sensor.iphone_7_battery_state:
+      hidden: true
+# Show links to resources in log and frontend
+# introduction:
+
+# 前端开启
+frontend:
+  themes:
+    night:
+      # 主界面 #
+      primary-color: "#1DE9B6" # 主 UI 字体颜色
+      primary-background-color: "#303030" # 其他部件背景色 (dialogs, e.t.c)
+      secondary-background-color: "#303030" # 主 UI 背景颜色
+      paper-card-background-color: "#424242" # 卡片背景颜色
+      paper-item-icon-color: "#1DE9B6" # Icon colour
+      primary-text-color: "#FFFFFF" # 首选字体颜色
+      secondary-text-color: "rgba(255, 255, 255, 0.7)" # 次字体颜色
+      disabled-text-color: "rgba(255, 255, 255, 0.5)" # Disabled text colour
+      divider-color: "rgba(255, 255, 255, 0.12)" # Divider colour
+      paper-card-header-color: "#FFFFFF" # 卡片标题颜色
+
+      # 侧边栏 #
+      paper-listbox-background-color: "#424242" # 背景色
+      paper-listbox-color: "#FFFFFF" # 字体色
+      paper-grey-200: "#616161" # 选中项背景色
+
+      # 开关 #
+      paper-toggle-button-checked-ink-color: "#1DE9B6"
+      paper-toggle-button-checked-button-color: "#1DE9B6"
+      paper-toggle-button-checked-bar-color: "#1DE9B6"
+
+      # Sliders #
+      paper-slider-knob-color: "#1DE9B6"
+      paper-slider-knob-start-color: "#1DE9B6"
+      paper-slider-pin-color: "#1DE9B6"
+      paper-slider-active-color: "#1DE9B6"
+      paper-slider-secondary-color: "#33F2D8"
+      
+    darkred:
+      # Main colors that can be changed
+      dark-primary-color: "#c66900"
+      disabled-text-color: "#545454"
+      divider-color: "rgba(255, 255, 255, 0.12)"
+      light-primary-color: "#e06c6c"
+      paper-card-background-color: "#1d1d1d"
+      paper-grey-200: "#191919"
+      paper-item-icon-color: "#d3d3d3"
+      paper-listbox-background-color: "#202020"
+      primary-background-color: "#303030"
+      primary-color: "#d32f2f"
+      primary-text-color: "#cfcfcf"
+      secondary-background-color: "#131313"
+      sidebar-text_-_background: "#62717b" 
+      # Colors based on variables, see above
+      paper-card-header-color: "var(--paper-item-icon-color)" 
+      paper-item-icon-active-color: "var(--primary-color)"
+      paper-item-icon_-_color: "var(--primary-text-color)"
+      paper-listbox-color: "var(--primary-text-color)"
+      paper-grey-50: "var(--primary-text-color)"
+      paper-slider-active-color: "var(--primary-color)"
+      paper-slider-knob-color: "var(--primary-color)"
+      paper-slider-knob-start-color: "var(--primary-color)"
+      paper-slider-pin-color: "var(--primary-color)"
+      paper-slider-secondary-color: "var(--light-primary-color)"
+      paper-toggle-button-checked-ink-color: "var(--dark-primary-color)"
+      paper-toggle-button-checked-button-color: "var(--primary-color)"
+      paper-toggle-button-checked-bar-color: "var(--light-primary-color)"
+      paper-toggle-button-unchecked-bar-color: "var(--primary-text-color)"
+      secondary-text-color: "var(--primary-color)"
+      table-row-background-color: "var(--paper-card-background-color)"
+      table-row-alternative-background-color: "var(--sidebar-text_-_background)"
+    
+    darkcyan:
+    # Main colors that can be changed
+      primary-color: "#00bcd4"
+      disabled-text-color: "#545454"
+      divider-color: "rgba(255, 255, 255, 0.12)"
+      paper-card-background-color: "#4e4e4e"
+      paper-grey-200: "#191919"
+      paper-item-icon-color: "#d3d3d3"
+      paper-listbox-background-color: "#202020"
+      paper-listbox-color: "#FFFFFF"      
+      primary-background-color: "#303030"
+      primary-text-color: "#cfcfcf"      
+      secondary-background-color: "#2b2b2b"
+      secondary-text-color: "#04a7bc"
+    # Colors based on variables, see above
+      label-badge-background-color: "var(--secondary-background-color)"
+      label-badge-text-color: "var(--text-primary-color)"
+      paper-card-header-color: "#var(--paper-item-icon-color)"
+      paper-grey-50: "var(--primary-text-color)"
+      paper-item-icon-active-color: "var(--primary-color)"
+      paper-item-icon_-_color: "var(--primary-text-color)"
+      paper-slider-active-color: "var(--primary-color)"
+      paper-slider-knob-color: "var(--primary-color)"
+      paper-slider-knob-start-color: "var(--primary-color)"
+      paper-slider-pin-color: "var(--primary-color)"
+      paper-slider-secondary-color: "var(--light-primary-color)"     
+      paper-toggle-button-checked-ink-color: "var(--dark-primary-color)"
+      paper-toggle-button-checked-button-color: "var(--primary-color)"
+      paper-toggle-button-checked-bar-color: "var(--light-primary-color)"
+      paper-toggle-button-unchecked-bar-color: "var(--primary-text-color)"
+
+# Enables configuration UI
+config:
+
+# http 服务
+http:
+  api_password: !secret http_password
+  trusted_networks: 
+    - 127.0.0.1
+    - ::1
+    - 192.168.50.0/24
+
+
+# 开启更新检测，默认关闭，需要开启请取消备注
+# updater:
+
+# 开启自动设备探测
+discovery:
+
+# ios设备，可获取电量及充电信息
+ios:
+
+# 开启语音指令
+#conversation:
+
+# 历史记录
+history:
+
+# 事件log
+logbook:
+
+# 追踪日出日落
+sun:
+
+# 语音合成
+tts:
+  - platform: baidu
+    language: zh
+    api_key: !secret baidu_apikey
+    secret_key: !secret baidu_key
+    speed: 5
+    pitch: 5
+    volume: 5
+    person: 1
+    
+# 小米平台
+xiaomi:
+  gateways:
+      - mac: F0B429B43088
+        key: !secret xiaomi_key
+
+# yeelight
+
+
+
+# 设备追踪
+device_tracker:
+  - platform: asuswrt
+    host: 192.168.50.1
+    username: admin
+    password: !secret router_password
+    protocol: telnet
+    track_new_devices: no
+
+# IFTTT
+ifttt:
+  key: !secret ifttt_key
+
+# 自定义传感器
+sensor:
+#潮汐
+#  - platform: command_line
+#    name: Tide
+#    command: "python3 /home/pi/Downloads/tide.py" 
+#月相
+  - platform: moon
+  - platform: template
+    sensors:
+      moon_state:
+        value_template: '{% if is_state("sersor.moon", "New moon") %}新月{% elif is_state("sersor.moon", "Waxing crescent") %}娥眉月{% elif is_state("sersor.moon", "First quarter") %}上弦月{% elif is_state("sersor.moon", "Waxing gibbous") %}盈凸月{% elif is_state("sersor.moon", "Full moon") %}满月{% elif is_state("sersor.moon", "Waning gibbous") %}亏凸月{% elif is_state("sersor.moon", "Last quarter") %}下弦月{% else %}残月{% endif %}'
+        friendly_name: '月亮'
+#太阳 
+  - platform: template
+    sensors:
+      sun_state:
+        value_template: '{% if is_state("sun.sun", "above_horizon") %}日出{% else %}日落{% endif %}'
+        friendly_name: '太阳'
+#植物监测仪
+  - platform: miflora
+    mac: 'C4:7C:8D:64:DD:98'
+    name: coconut
+    force_update: true
+    median: 2
+#PS4游戏
+  - platform: template
+    sensors:
+      games:
+        value_template: '{% if states.media_player.playstation_4 %}{{ states.media_player.playstation_4.attributes.source }}{% else %}无{% endif %}'
+        friendly_name: '游戏名'
+#PS4
+media_player:
+  - platform: ps4
+    host: 192.168.50.25
+
+  - platform: vlc
+    name: speaker_1
+    arguments: '--alsa-audio-device=hw:0,1'
+    
+
+# 盆栽状态
+binary_sensor:
+  - platform: template
+    sensors:
+      plant_moisture:
+        value_template: '{{ states.sensor.coconut_moisture.state | float <= 20 }}'
+        friendly_name: '湿度状态'
+  - platform: template
+    sensors:
+      plant_fertility:
+        value_template: '{{ states.sensor.coconut_moisture.state | float <= 350 }}'
+        friendly_name: '肥力状态'
+  - platform: template
+    sensors:
+      co:
+        friendly_name: '花'
+        device_class: 'motion'
+        value_template: >-
+          {%- if is_state("binary_sensor.plant_moisture", "off")
+              and is_state("binary_sensor.plant_fertility", "off") -%}
+          False
+          {%- else -%}
+          True
+          {%- endif -%}
+
+
+# 群组管理
+group:
+  bedroom:
+    name: 卧室
+    view: no
+    control: hidden
+    entities:
+      - light.gateway_light_f0b429b43088
+      - light.yeelight_strip_286c072f6ce6
+      - sensor.humidity_158d00010e50d7
+      - sensor.temperature_158d00010e50d7
+      - sensor.illumination_f0b429b43088
+      - binary_sensor.motion_sensor_158d000155b4be
+      - switch.plug_158d00011c85e2
+  nature:
+    name: 自然
+    view: no
+    entities:
+      - sensor.sun_state
+      - sensor.moon_state
+      - sensor.coconut_temperature
+      - sensor.coconut_light_intensity
+      - sensor.tide
+  plant:
+    name: 盆栽
+    view: no
+    entities:
+      - sensor.coconut_moisture
+      - sensor.coconut_conductivity
+  game:
+    name: 游戏
+    view: no
+    entities:
+      - sensor.games
+  scene_rename:
+    name: 场景
+    view: no
+    entities:
+      - scene.exit
+      - scene.sleep
+# 场景
+scene:
+  - name: sleep
+    entities:
+      group.all_lights: off
+  - name: exit
+    entities:
+      group.all_lights: off
+      group.all_switches: off
+      media_player.playstation_4: off
+
+# 自定义 panel,此为 Floorplan
+panel_custom:
+  - name: floorplan
+    sidebar_title: Floorplan
+    sidebar_icon: mdi:home
+    url_path: floorplan
+    config: !include floorplan.yaml

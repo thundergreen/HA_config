@@ -1,0 +1,24 @@
+group:
+  awesome_people:
+    name: "\u5BB6\u4EBA"
+    view: false
+    entities:
+    - device_tracker.iphone7
+    - device_tracker.chenxindeiphone
+    - device_tracker.android7729468557ff9f99
+  bedroom:
+    name: "\u5367\u5BA4"
+    view: false
+    entities:
+    - light.gateway_light_f0b429b43088
+    - sensor.humidity_158d00010e50d7
+    - sensor.temperature_158d00010e50d7
+    - binary_sensor.motion_sensor_158d000155b4be
+bedroom:
+  entities:
+  - light.gateway_light_f0b429b43088
+  - sensor.temperature_158d00010e50d7
+  - sensor.humidity_158d00010e50d7
+  - binary_sensor.motion_sensor_158d000155b4be
+  name: "\u5367\u5BA4"
+  view: false

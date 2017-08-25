@@ -13,11 +13,20 @@
     展示信息有：室内温湿度，PS4 开关状态及游玩游戏显示，开关及灯具等的状态及操控，家庭成员在家情况，盆栽健康状况，动态月相以及场景开关。
     
     未来将进行 3D 化修改。
+
+- 高德静态地图
+    
+    地图附带家周边交通态势，请在配置中填入经度纬度及高德 API Key。
  
 - 接入设备配置
 
     - 花花草草监测仪
     - 小米多功能网关
+        
+        - 人体传感器
+        - 温湿度传感器
+        - Zigbee 插座
+        
     - 华硕路由器
     - PS4
     - APPLE TV
@@ -30,6 +39,12 @@ This repo contains my personal HA configuration, which including:
 
     - Mi Flora Sensor
     - Xiaomi Gateway & Zigbee devices
+            
+        - Motion Sensor
+        - Temp&Hum Sensor
+        - Zigbee Plug
+        
+
     - ASUS router
     - PS4
     - Apple TV

@@ -14,13 +14,19 @@ homeassistant:
   customize:
     binary_sensor.motion_sensor_158d000155b4be:
       friendly_name: 人体传感器
+      custom_ui_state_card: custom-ui
+      extra_data_template: "剩余电量${attributes.battery_level}%"
     light.gateway_light_f0b429b43088:
       friendly_name: 网关灯
     sensor.humidity_158d00010e50d7:
       friendly_name: 湿度
       icon: mdi:water
+      custom_ui_state_card: custom-ui
+      extra_data_template: "剩余电量${attributes.battery_level}%"
     sensor.temperature_158d00010e50d7:
       friendly_name: 温度
+      custom_ui_state_card: custom-ui
+      extra_data_template: "剩余电量${attributes.battery_level}%"
     sun.sun:
       hidden: true
     sensor.moon:
@@ -316,6 +322,12 @@ binary_sensor:
           True
           {%- endif -%}
 
+#高德地图
+camera:
+  name: Home
+  platform: generic
+  still_image_url: http://restapi.amap.com/v3/staticmap?location=经度,纬度&zoom=14&scale=2&size=305*185&traffic=1&&labels=家,0,0,35,0xFFFFFF,0x5288d8:经度,纬度&key=你的高德api-key
+  limit_refetch_to_url_change: false
 
 # 群组管理
 group:

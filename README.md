@@ -27,6 +27,7 @@
         - 温湿度传感器
         - Zigbee 插座
         
+    - 米家空调伴侣
     - 华硕路由器
     - PS4
     - APPLE TV
@@ -45,6 +46,7 @@ This repo contains my personal HA configuration, which including:
         - Zigbee Plug
         
 
+    - MIJIA Ac Partner
     - ASUS router
     - PS4
     - Apple TV

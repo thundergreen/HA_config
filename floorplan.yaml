@@ -10,6 +10,7 @@ groups:
   - name: Lights
     entities:
       - light.gateway_light_f0b429b43088
+      - light.yeelight_strip_286c072f6ce6
     states:
       - state: 'on'
         class: 'light-on'
@@ -18,13 +19,17 @@ groups:
     action:
       service: toggle
       
-  - name: Binary Sensors
+  - name: Air_Conditioner
     entities:
-      - binary_sensor.motion_sensor_158d000155b4be
+      - climate.mi_acpartner
     states:
       - state: 'off'
         class: 'ac-off'
-      - state: 'on'
+      - state: 'cool'
+        class: 'ac-on'
+      - state: 'auto'
+        class: 'ac-on'
+      - state: 'heat'
         class: 'ac-on'
 
   - name: Tempreature_sensor

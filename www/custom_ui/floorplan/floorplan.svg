@@ -41,12 +41,12 @@
      showgrid="false"
      showborder="false"
      inkscape:zoom="0.56787565"
-     inkscape:cx="333.86843"
+     inkscape:cx="753.85474"
      inkscape:cy="480.31079"
      inkscape:window-x="0"
      inkscape:window-y="1"
      inkscape:window-maximized="1"
-     inkscape:current-layer="page1" />
+     inkscape:current-layer="svg2" />
   <defs
      id="defs4" />
   <g
@@ -811,7 +811,7 @@
        id="g4028" />
   </g>
   <g
-     id="binary_sensor.motion_sensor_158d000155b4be"
+     id="climate.mi_acpartner"
      transform="matrix(0.18828496,-0.0032275,0.00377122,0.22000409,882.43503,256.2753)"
      inkscape:label="#g4183">
     <path

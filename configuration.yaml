@@ -2,8 +2,8 @@ homeassistant:
   # 系统名称，金窝银窝随便取
   name: 家
   # 经纬度设置
-  latitude: 24.4798
-  longitude: 118.0819
+  latitude: xxxxx
+  longitude: xxxxx
   # 海拔
   elevation: 11
   # 度量单位，这里选择“米”

@@ -262,14 +262,14 @@ sensor:
 #  - platform: command_line
 #    name: Tide
 #    command: "python3 /home/pi/Downloads/tide.py" 
-#月相
+#月相汉化
   - platform: moon
   - platform: template
     sensors:
       moon_state:
         value_template: '{% if is_state("sersor.moon", "New moon") %}新月{% elif is_state("sersor.moon", "Waxing crescent") %}娥眉月{% elif is_state("sersor.moon", "First quarter") %}上弦月{% elif is_state("sersor.moon", "Waxing gibbous") %}盈凸月{% elif is_state("sersor.moon", "Full moon") %}满月{% elif is_state("sersor.moon", "Waning gibbous") %}亏凸月{% elif is_state("sersor.moon", "Last quarter") %}下弦月{% else %}残月{% endif %}'
         friendly_name: '月亮'
-#太阳 
+#太阳汉化 
   - platform: template
     sensors:
       sun_state:

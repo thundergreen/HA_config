@@ -7,6 +7,7 @@
     - 部分组件的汉化
     - 暗色主题（来自社区）
     - Template 模板的活用
+    - Custom UI
  
 - 活点平面图
 
@@ -26,12 +27,14 @@
         - 人体传感器
         - 温湿度传感器
         - Zigbee 插座
+        - 无线开关
         
     - 米家空调伴侣
     - 华硕路由器
     - PS4
     - APPLE TV
     - VLC
+    - Air Visual
  
 ##  English
 This repo contains my personal HA configuration, which including:
@@ -44,6 +47,7 @@ This repo contains my personal HA configuration, which including:
         - Motion Sensor
         - Temp&Hum Sensor
         - Zigbee Plug
+        - Button
         
 
     - MIJIA Ac Partner
@@ -51,6 +55,7 @@ This repo contains my personal HA configuration, which including:
     - PS4
     - Apple TV
     - VLC
+    - Air Visual
 
 - Customization
 

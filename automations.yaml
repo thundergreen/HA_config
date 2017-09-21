@@ -1,1 +1,16 @@
-[]
+- id: Turn_off_AC
+  alias: AirConditioner
+  trigger:
+  - entity_id: binary_sensor.door_window_sensor_158d00019e0f1d
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: climate.mi_acpartner
+    state: cool
+  action:
+  - data:
+      operation_mode: 'off'
+    entity_id: climate.mi_acpartner
+    service: climate.set_operation_mode

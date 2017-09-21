@@ -2,8 +2,8 @@ homeassistant:
   # 系统名称，金窝银窝随便取
   name: 家
   # 经纬度设置
-  latitude: xxxxx
-  longitude: xxxxx
+  latitude: xx.xxxxx
+  longitude: xxx.xxxx
   # 海拔
   elevation: 11
   # 度量单位，这里选择“米”
@@ -11,85 +11,13 @@ homeassistant:
   # 时区
   time_zone: Asia/Shanghai
   # 设备昵称
-  customize:
-    binary_sensor.motion_sensor_158d000155b4be:
-      friendly_name: 人体传感器
-      custom_ui_state_card: custom-ui
-      extra_data_template: "剩余电量${attributes.battery_level}%"
-    light.gateway_light_f0b429b43088:
-      friendly_name: 网关灯
-    sensor.humidity_158d00010e50d7:
-      friendly_name: 湿度
-      icon: mdi:water
-      custom_ui_state_card: custom-ui
-      extra_data_template: "剩余电量${attributes.battery_level}%"
-    sensor.temperature_158d00010e50d7:
-      friendly_name: 温度
-      custom_ui_state_card: custom-ui
-      extra_data_template: "剩余电量${attributes.battery_level}%"
-    sun.sun:
-      hidden: true
-    sensor.moon:
-      friendly_name: 月亮
-      icon: mdi:brightness-2
-      hidden: true
-    sensor.moon_state: 
-      icon: mdi:brightness-2
-    sensor.illumination_f0b429b43088:
-      friendly_name: 亮度
-      homebridge_sensor_type: light
-      homebridge_hidden: true
-    switch.plug_158d00011c85e2:
-      friendly_name: 魔镜 
-      icon: mdi:glassdoor   
-    sensor.tide:
-      friendly_name: 潮汐
-      icon: mdi:waves
-    sensor.sun_state:
-      icon: mdi:white-balance-sunny
-    sensor.coconut_temperature: 
-      friendly_name: 室外温度
-      homebridge_hidden: true
-    sensor.coconut_light_intensity:
-      friendly_name: 室外光照
-      homebridge_hidden: true
-    sensor.games:
-      icon: mdi:gamepad-variant
-    sensor.coconut_battery:
-      hidden: true
-    sensor.coconut_moisture:
-      friendly_name: 土壤湿度
-      icon: mdi:cup-water
-    sensor.coconut_conductivity:
-      friendly_name: 土壤肥力
-      icon: mdi:flower
-    scene.sleep:
-      friendly_name: 晚安
-      icon: mdi:sleep
-    scene.exit:
-      friendly_name: 离开
-      icon: mdi:logout
-    light.yeelight_strip_286c072f6ce6:
-      friendly_name: 灯带
-      homebridge_hidden: true
-    media_player.playstation_4:
-      homebridge_hidden: true
-    media_player.speaker_1:
-      friendly_name: 喇叭
-      homebridge_hidden: true
-    binary_sensor.plant_fertility:
-      hidden: true
-    binary_sensor.plant_moisture:
-      hidden: true
-    binary_sensor.co:
-      hidden: true
-      homebridge_hidden: False
-    sensor.iphone_7_battery_level:
-      hidden: true
-    sensor.iphone_7_battery_state:
-      hidden: true
-# Show links to resources in log and frontend
+  customize: !include customize.yaml
+
 # introduction:
+
+#自定义 UI
+customizer:
+  custom_ui: local
 
 # 前端开启
 frontend:
@@ -262,14 +190,14 @@ sensor:
 #  - platform: command_line
 #    name: Tide
 #    command: "python3 /home/pi/Downloads/tide.py" 
-#月相汉化
+#月相
   - platform: moon
   - platform: template
     sensors:
       moon_state:
         value_template: '{% if is_state("sersor.moon", "New moon") %}新月{% elif is_state("sersor.moon", "Waxing crescent") %}娥眉月{% elif is_state("sersor.moon", "First quarter") %}上弦月{% elif is_state("sersor.moon", "Waxing gibbous") %}盈凸月{% elif is_state("sersor.moon", "Full moon") %}满月{% elif is_state("sersor.moon", "Waning gibbous") %}亏凸月{% elif is_state("sersor.moon", "Last quarter") %}下弦月{% else %}残月{% endif %}'
         friendly_name: '月亮'
-#太阳汉化 
+#太阳 
   - platform: template
     sensors:
       sun_state:
@@ -287,15 +215,30 @@ sensor:
       games:
         value_template: '{% if states.media_player.playstation_4 %}{{ states.media_player.playstation_4.attributes.source }}{% else %}无{% endif %}'
         friendly_name: '游戏名'
-#PS4
+
+#空气质量
+  - platform: airvisual
+    api_key: !secret airvisual_key
+    monitored_conditions:
+      - us
+      - cn
+    radius: 500
+
+  - platform: template
+    sensors:
+      air_index:
+        value_template: '{% if is_state("sensor.chinese_air_pollution_level", "Good") %}优{% elif is_state("sensor.chinese_air_pollution_level", "Moderate") %}中等{% elif is_state("sensor.chinese_air_pollution_level", "Unhealthy for Sensitive Groups") %}轻度污染{% elif is_state("sensor.chinese_air_pollution_level", "Unhealthy") %}不健康{% elif is_state("sensor.chinese_air_pollution_level", "Very Unhealthy") %}极不健康{% else %}有毒害{% endif %}'
+        friendly_name: '空气质量等级'
+
 media_player:
+#PS4
   - platform: ps4
     host: 192.168.50.25
-
+#魔镜音响
   - platform: vlc
     name: speaker_1
     arguments: '--alsa-audio-device=hw:0,1'
-    
+
 
 # 盆栽状态
 binary_sensor:
@@ -307,7 +250,7 @@ binary_sensor:
   - platform: template
     sensors:
       plant_fertility:
-        value_template: '{{ states.sensor.coconut_moisture.state | float <= 350 }}'
+        value_template: '{{ states.sensor.coconut_conductivity.state | float <= 350 }}'
         friendly_name: '肥力状态'
   - platform: template
     sensors:
@@ -322,13 +265,6 @@ binary_sensor:
           True
           {%- endif -%}
 
-#高德地图
-camera:
-  name: Home
-  platform: generic
-  still_image_url: http://restapi.amap.com/v3/staticmap?location=经度,纬度&zoom=14&scale=2&size=305*185&traffic=1&&labels=家,0,0,35,0xFFFFFF,0x5288d8:经度,纬度&key=你的高德api-key
-  limit_refetch_to_url_change: false
-
 #空调伴侣
 climate:
   - platform: mi_acpartner
@@ -338,46 +274,18 @@ climate:
     target_temp: 26
     target_sensor: sensor.temperature_158d00010e50d7
 
+
+
+#高德地图
+#camera:
+#  name: Home
+#  platform: generic
+#  still_image_url: http://restapi.amap.com/v3/staticmap?location= xxxx.xxxx&zoom=14&scale=2&size=305*185&traffic=1&&labels=家,0,0,35,0xFFFFFF,0x5288d8:xxxx,xxxx&key=xxxxxxxxxxxxx
+#  limit_refetch_to_url_change: false
+
 # 群组管理
-group:
-  bedroom:
-    name: 卧室
-    view: no
-    control: hidden
-    entities:
-      - light.gateway_light_f0b429b43088
-      - light.yeelight_strip_286c072f6ce6
-      - sensor.humidity_158d00010e50d7
-      - sensor.temperature_158d00010e50d7
-      - sensor.illumination_f0b429b43088
-      - binary_sensor.motion_sensor_158d000155b4be
-      - switch.plug_158d00011c85e2
-  nature:
-    name: 自然
-    view: no
-    entities:
-      - sensor.sun_state
-      - sensor.moon_state
-      - sensor.coconut_temperature
-      - sensor.coconut_light_intensity
-      - sensor.tide
-  plant:
-    name: 盆栽
-    view: no
-    entities:
-      - sensor.coconut_moisture
-      - sensor.coconut_conductivity
-  game:
-    name: 游戏
-    view: no
-    entities:
-      - sensor.games
-  scene_rename:
-    name: 场景
-    view: no
-    entities:
-      - scene.exit
-      - scene.sleep
+group: !include groups.yaml
+
 # 场景
 scene:
   - name: sleep
@@ -396,3 +304,6 @@ panel_custom:
     sidebar_icon: mdi:home
     url_path: floorplan
     config: !include floorplan.yaml
+
+#自动化
+automation: !include automations.yaml

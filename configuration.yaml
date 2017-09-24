@@ -2,8 +2,8 @@ homeassistant:
   # 系统名称，金窝银窝随便取
   name: 家
   # 经纬度设置
-  latitude: xx.xxxxx
-  longitude: xxx.xxxx
+  latitude: xxxxxx
+  longitude: xxxxx
   # 海拔
   elevation: 11
   # 度量单位，这里选择“米”
@@ -68,7 +68,7 @@ tts:
     person: 1
     
 # 小米平台
-xiaomi:
+xiaomi_aqara:
   gateways:
       - mac: F0B429B43088
         key: !secret xiaomi_key
@@ -85,6 +85,7 @@ device_tracker:
     password: !secret router_password
     protocol: telnet
     track_new_devices: no
+    interval_seconds: 60
 
 # IFTTT
 ifttt:
@@ -124,7 +125,7 @@ sensor:
 
 #空气质量
   - platform: airvisual
-    api_key: !secret airvisual_key
+    api_key: mvMXuYS9SAuSmrsuq
     monitored_conditions:
       - us
       - cn
@@ -135,12 +136,31 @@ sensor:
       air_index:
         value_template: '{% if is_state("sensor.chinese_air_pollution_level", "Good") %}优{% elif is_state("sensor.chinese_air_pollution_level", "Moderate") %}中等{% elif is_state("sensor.chinese_air_pollution_level", "Unhealthy for Sensitive Groups") %}轻度污染{% elif is_state("sensor.chinese_air_pollution_level", "Unhealthy") %}不健康{% elif is_state("sensor.chinese_air_pollution_level", "Very Unhealthy") %}极不健康{% else %}有毒害{% endif %}'
         friendly_name: '空气质量等级'
+#季节
+  - platform: season
+    type: meteorological
 
-media_player:
+  - platform: template
+    sensors:
+      seasons:
+        value_template: '{% if is_state("sensor.season", "Spring") %}春季{% elif is_state("sensor.season", "Summer") %}夏季{% elif is_state("sensor.season", "Autumn") %}秋季{% else %}冬季{% endif %}'
+        friendly_name: '季节'
+        icon_template: >
+          {% if is_state("sensor.season", "Spring") %}
+            mdi:leaf
+          {% elif is_state("sensor.season", "Summer") %}
+            mdi:beach
+          {% elif is_state("sensor.season", "Autumn") %}
+            mdi:weather-windy-variant
+          {% else %}
+            mdi:snowflake
+          {% endif %}
+
 #PS4
+media_player:
   - platform: ps4
     host: 192.168.50.25
-#魔镜音响
+
   - platform: vlc
     name: speaker_1
     arguments: '--alsa-audio-device=hw:0,1'
@@ -156,7 +176,7 @@ binary_sensor:
   - platform: template
     sensors:
       plant_fertility:
-        value_template: '{{ states.sensor.coconut_conductivity.state | float <= 350 }}'
+        value_template: '{{ states.sensor.coconut_conductivity.state | float <= 300 }}'
         friendly_name: '肥力状态'
   - platform: template
     sensors:
@@ -180,13 +200,20 @@ climate:
     target_temp: 26
     target_sensor: sensor.temperature_158d00010e50d7
 
+#Todoist
+#calendar:
+#  - platform: todoist
+#    token: !secret todoist_token
+#    custom_projects:
+#      - name: 'This week'
+#        due_date_days: 7
 
 
 #高德地图
 #camera:
 #  name: Home
 #  platform: generic
-#  still_image_url: http://restapi.amap.com/v3/staticmap?location= xxxx.xxxx&zoom=14&scale=2&size=305*185&traffic=1&&labels=家,0,0,35,0xFFFFFF,0x5288d8:xxxx,xxxx&key=xxxxxxxxxxxxx
+#  still_image_url: http://restapi.amap.com/v3/staticmap?location=xxxx,xxxx&zoom=14&scale=2&size=305*185&traffic=1&&labels=家,0,0,35,0xFFFFFF,0x5288d8:xxx,xx&key=xxxxxxxxxxxxx
 #  limit_refetch_to_url_change: false
 
 # 群组管理
@@ -213,3 +240,8 @@ panel_custom:
 
 #自动化
 automation: !include automations.yaml
+
+#人脸识别
+microsoft_face:
+  api_key: !secret microsoft_key
+  azure_region: westcentralus

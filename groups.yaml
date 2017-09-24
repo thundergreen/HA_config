@@ -17,6 +17,7 @@ nature:
   name: 自然
   view: no
   entities:
+    - sensor.seasons
     - sensor.sun_state
     - sensor.moon_state
     - sensor.coconut_temperature

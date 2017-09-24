@@ -142,5 +142,8 @@ sensor.us_air_quality_index:
 sensor.us_main_pollutant:
   hidden: true
 
+sensor.season:
+  hidden: true
+
 automation.airconditioner:
   friendly_name: 开窗关空调

@@ -65,35 +65,11 @@ svg, svg * {
   stroke-width: 1px !important;
 }
 
-/* Last motion entity */
-
-.last-motion {
-  stroke: #808080 !important;
-  stroke-width: 1px !important;
-  stroke-opacity: 1 !important;
-}
-
-/* Alarm Panel */
-
-.alarm-disarmed {
-  fill: #3c763d !important;
-}
-
-.alarm-armed {
-  fill: #8a6d3b !important;
-}
-
-/* Camera */
-
-.camera-idle {
-/*  fill: #B9CEF7 !important; */
-  fill: #6FAECE !important;
-}
 
 /* 灯 */
 
 .light-off {
-  fill: #6C7B8B !important;
+  opacity: 0 !important;
 }
 
 .light-on {
@@ -109,7 +85,7 @@ svg, svg * {
 }
 
 .temp-average {
-  fill: #fff !important;
+  fill: #9C9C9C !important;
   fill-opacity: 1 !important;
 }
 
@@ -126,7 +102,7 @@ svg, svg * {
 }
 
 .hum-average {
-  fill: #fff !important;
+  fill: #9C9C9C !important;
   fill-opacity: 1 !important;
 }
 
@@ -135,34 +111,8 @@ svg, svg * {
   fill-opacity: 1 !important;
 }
 
-/* Illumination sensor */
 
-.lux-low {
-  fill: #000000 !important;
-  fill-opacity: 1 !important;
-}
-
-.lux-average {
-  fill: #fff !important;
-  fill-opacity: 1 !important;
-}
-
-.lux-high {
-  fill: #FFFF00 !important;
-  fill-opacity: 1 !important;
-}
-
-/* 魔镜 */
-
-.mirror-off {
-  fill: #6C7B8B !important;
-}
-
-.mirror-on {
-  opacity: 1 !important;
-}
-
-/* 空调动画 */
+/* 闪烁动画 */
 @keyframes mymove {
   50% { opacity: 0; }
 }
@@ -171,6 +121,20 @@ svg, svg * {
   50% { opacity: 0; }
 }
 
+/* 盆栽 */
+.healthy {
+  fill: #228B22 !important;
+  fill-opacity: 1 !important;
+}
+
+.unhealthy {
+  fill:   #FF4500 !important;
+  fill-opacity: 1 !important;
+  position: relative !important;
+  animation: mymove 3s infinite ease !important;
+  -webkit-animation: mymove 3s infinite ease !important;
+}
+/* 空调 */
 .ac-off {
   opacity: 1 !important;
 }
@@ -181,26 +145,6 @@ svg, svg * {
   -webkit-animation: mymove 3s infinite ease !important;
 }
 
-/* 设备状态 */
-.at-home {
-  fill: #a3cf62 !important;
-}
-.away {
-  fill: #FF0033 !important;
-}
-
-/* PS4 */
-.ps4-off {
-  fill: #6C7B8B !important;
-}
-
-.ps4-on {
-  opacity: 1 !important;
-}
-
-.ps4-playing {
-  fill: #FF0033 !important;
-}
 
 /* 显示屏 */
 .screen {
@@ -211,13 +155,45 @@ svg, svg * {
   -webkit-animation: mymove 10s infinite ease !important;
 }
 
-/* 盆栽 */
-.healthy {
-  opacity: 1 !important;
+/* 早晚 */
+.daytime {
+  fill: #ffffff !important;
+  fill-opacity: 1 !important;
 }
 
-.unhealthy {
-  fill: #FF0033 !important
-  animation: mymove 4s infinite ease !important;
-  -webkit-animation: mymove 4s infinite ease !important;
+.night {
+  fill: #000000 !important;
+  fill-opacity: 0.7 !important;
+}
+
+/* 星星 */
+.star {
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    box-shadow: 165px 540px #FFF , 74px 215px #fff , 149px 335px #fff , 69px 327px #fff , 17px 318px #fff , 131px 443px #fff , 46px 280px #fff , 129px 38px #fff, 138px 42px #fff, 108px 194px #fff , 150px 339px #fff , 151px 489px #fff , 156px 326px #fff , 140px 447px #fff , 3px 231px #fff;
+    animation: animStar 50s linear infinite;
+}
+
+.star:after {
+  content: " ";
+  position: absolute;
+  top: 2000px;
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  box-shadow: 165px 540px #FFF , 74px 215px #fff , 149px 335px #fff , 69px 327px #fff , 17px 318px #fff , 131px 443px #fff , 46px 280px #fff , 129px 38px #fff, 138px 42px #fff, 108px 194px #fff , 150px 339px #fff , 151px 489px #fff , 156px 326px #fff , 140px 447px #fff , 3px 231px #fff;
+}
+
+@keyframes animStar {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-2000px);
+  }
+}
+
+.staroff {
+    opacity: 0 !important;
 }

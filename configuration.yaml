@@ -12,6 +12,9 @@ homeassistant:
   time_zone: Asia/Shanghai
   # 设备昵称
   customize: !include customize.yaml
+  customize_domain:
+    group:
+      homebridge_hidden: true
 
 # introduction:
 
@@ -37,7 +40,6 @@ http:
   ssl_certificate: 
   ssl_key: 
 
-
 # 开启更新检测，默认关闭，需要开启请取消备注
 # updater:
 
@@ -52,7 +54,7 @@ ios:
 
 # 历史记录
 history:
-  exclude: #排除
+  exclude:
     domains:
       - automation
       - camera
@@ -65,17 +67,19 @@ history:
       - sensor.moon_state
       - sensor.season
 
-# log
+# 事件log
 logbook:
 
-##系统 log 等级
 logger:
-  default: error
+  default: warning
 
 #数据库
 recorder:
   purge_interval: 2
   purge_keep_days: 5
+
+#地图
+map:
 
 # 追踪日出日落
 sun:
@@ -98,8 +102,11 @@ xiaomi_aqara:
         key: !secret xiaomi_key
 
 # yeelight
-
-
+light:
+  - platform: yeelight
+    devices:
+      192.168.50.124:
+        name: Lamp
 
 # 设备追踪
 device_tracker:
@@ -117,6 +124,11 @@ ifttt:
 
 # 自定义传感器
 sensor:
+#潮汐
+  - platform: command_line
+    name: Tide
+    command: "python3 /home/pi/Downloads/tide.py"
+    scan_interval: 43200
 #月相
   - platform: moon
   - platform: template
@@ -130,6 +142,19 @@ sensor:
       sun_state:
         value_template: '{% if is_state("sun.sun", "above_horizon") %}日出{% else %}日落{% endif %}'
         friendly_name: '太阳'
+
+  - platform: template
+    sensors:
+      sunrise:
+        value_template: '{{ ((as_timestamp(states.sun.sun.attributes.next_rising)) | timestamp_local) [11:16] }}'
+        friendly_name: '日出时间'
+
+  - platform: template
+    sensors:
+      sunset:
+        value_template: '{{ ((as_timestamp(states.sun.sun.attributes.next_setting)) | timestamp_local) [11:16] }}'
+        friendly_name: '日落时间'
+
 #植物监测仪
   - platform: miflora
     mac: 'C4:7C:8D:64:DD:98'
@@ -137,29 +162,30 @@ sensor:
     force_update: true
     median: 2
 #PS4游戏
-  - platform: template
-    sensors:
-      games:
-        value_template: '{% if states.media_player.playstation_4 %}{{ states.media_player.playstation_4.attributes.source }}{% else %}无{% endif %}'
-        friendly_name: '游戏名'
+#  - platform: template
+#    sensors:
+#      games:
+#        value_template: '{% if states.media_player.playstation_4 %}{{ states.media_player.playstation_4.attributes.source }}{% else %}无{% endif %}'
+#        friendly_name: '游戏名'
 
 #空气质量
-  - platform: airvisual
-    api_key: !secret airvisual_key 
-    monitored_conditions:
-      - us
-      - cn
-    radius: 500
-#汉化
-  - platform: template
-    sensors:
-      air_index:
-        value_template: '{% if is_state("sensor.chinese_air_pollution_level", "Good") %}优{% elif is_state("sensor.chinese_air_pollution_level", "Moderate") %}中等{% elif is_state("sensor.chinese_air_pollution_level", "Unhealthy for Sensitive Groups") %}轻度污染{% elif is_state("sensor.chinese_air_pollution_level", "Unhealthy") %}不健康{% elif is_state("sensor.chinese_air_pollution_level", "Very Unhealthy") %}极不健康{% else %}有毒害{% endif %}'
-        friendly_name: '空气质量等级'
+#  - platform: airvisual
+#    api_key: mvMXuYS9SAuSmrsuq
+#    monitored_conditions:
+#      - us
+#      - cn
+#    radius: 500
+#    show_on_map: false
+
+#  - platform: template
+#    sensors:
+#      air_index:
+#        value_template: '{% if is_state("sensor.chinese_air_pollution_level", "Good") %}优{% elif is_state("sensor.chinese_air_pollution_level", "Moderate") %}中等{% elif is_state("sensor.chinese_air_pollution_level", "Unhealthy for Sensitive Groups") %}轻度污染{% elif is_state("sensor.chinese_air_pollution_level", "Unhealthy") %}不健康{% elif is_state("sensor.chinese_air_pollution_level", "Very Unhealthy") %}极不健康{% else %}有毒害{% endif %}'
+#        friendly_name: '空气质量等级'
 #季节
   - platform: season
     type: meteorological
-#汉化
+
   - platform: template
     sensors:
       seasons:
@@ -176,11 +202,12 @@ sensor:
             mdi:snowflake
           {% endif %}
 
+
 #PS4
 media_player:
-  - platform: ps4
-    host: 192.168.50.25
-#树莓派
+#  - platform: ps4
+#    host: 192.168.50.25
+
   - platform: vlc
     name: speaker_1
     arguments: '--alsa-audio-device=hw:0,1'
@@ -212,21 +239,13 @@ binary_sensor:
           {%- endif -%}
 
 #空调伴侣
-climate:
-  - platform: mi_acpartner
-    name: mi_acpartner
-    host: 192.168.50.236
-    token: !secret ac_token
-    target_temp: 26
-    target_sensor: sensor.temperature_158d00010e50d7
-
-#Todoist
-#calendar:
-#  - platform: todoist
-#    token: !secret todoist_token
-#    custom_projects:
-#      - name: 'This week'
-#        due_date_days: 7
+#climate:
+#  - platform: mi_acpartner
+#    name: mi_acpartner
+#    host: 192.168.50.236
+#    token: !secret ac_token
+#    target_temp: 26
+#    target_sensor: sensor.temperature_158d00010e50d7
 
 
 #高德地图
@@ -235,6 +254,57 @@ climate:
 #  platform: generic
 #  still_image_url: http://restapi.amap.com/v3/staticmap?location=xxxx,xxxx&zoom=14&scale=2&size=305*185&traffic=1&&labels=家,0,0,35,0xFFFFFF,0x5288d8:xxx,xx&key=xxxxxxxxxxxxx
 #  limit_refetch_to_url_change: false
+ffmpeg:
+  ffmpeg_bin: /usr/bin/ffmpeg
+
+#camera:
+#  - platform: ffmpeg
+#    input: http://192.168.50.152:8090
+
+#microsoft_face:
+#  api_key: 
+#  azure_region: westcentralus
+#  timeout: 4000
+
+#image_processing:
+# - platform: microsoft_face_identify
+#   group: test
+#   source:
+#    - entity_id: camera.ffmpeg
+
+alexa:
+
+intent_script:
+  LocateIntent:
+    speech:
+      text: Mom is {{ states('device_tracker.chenxindeiphone') }}
+  TurnonlightIntent:
+    speech:
+      text: Light is on
+    action:
+      service: light.turn_on
+      data:
+        entity_id: light.gateway_light_f0b429b43088
+  TurnofflightIntent:
+    speech:
+      text: Light is off
+    action:
+      service: light.turn_off
+      data:
+        entity_id: group.all_lights
+        
+#植物
+plant:
+  Coconut:
+    sensors:
+      moisture: sensor.coconut_moisture
+      battery: sensor.coconut_battery
+      conductivity: sensor.coconut_conductivity
+    min_moisture: 20
+    max_moisture: 60
+    min_battery: 10
+    min_conductivity: 350
+    max_conductivity: 3000
 
 
 
@@ -252,7 +322,7 @@ scene:
 # 自定义 panel,此为 Floorplan
 panel_custom:
   - name: floorplan
-    sidebar_title: Floorplan
+    sidebar_title: '平面图'
     sidebar_icon: mdi:home
     url_path: floorplan
     config: !include floorplan.yaml

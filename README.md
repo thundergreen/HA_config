@@ -4,16 +4,15 @@
 
 - 个性化配置
 
-    - 部分组件的汉化
+    - 全面汉化
     - 暗色主题（来自社区）
     - Template 模板的活用
     - Custom UI
  
-- 活点平面图
+- 3D 活点平面图
 
     展示信息有：室内温湿度，PS4 开关状态及游玩游戏显示，开关及灯具等的状态及操控，家庭成员在家情况，盆栽健康状况，动态月相以及场景开关。
     
-    未来将进行 3D 化修改。
 
 - 高德静态地图
     
@@ -35,6 +34,8 @@
     - APPLE TV
     - VLC
     - Air Visual
+    - 微软人脸识别
+    - 树莓派摄像头
  
 ##  English
 This repo contains my personal HA configuration, which including:
@@ -56,6 +57,8 @@ This repo contains my personal HA configuration, which including:
     - Apple TV
     - VLC
     - Air Visual
+    - Microsoft Face Detection
+    - Raspberry Pi Camera
 
 - Customization
 
@@ -63,7 +66,7 @@ This repo contains my personal HA configuration, which including:
     - Some dark themes (from community)
     - Use of different kinds of Template
  
-- Floorplan
+- 3D Floorplan
     The Floorplan shows information of :
     
     Temp&Humidity indoors, State of PS4 and Games' name playing, State of switches and light, Presence Detection, State of Flowers, Dynamic moon phrase and Scenes.

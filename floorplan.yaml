@@ -7,31 +7,6 @@ date_format: YYYY-MMM-DD
 hide_app_toolbar:
 
 groups:
-  - name: Lights
-    entities:
-      - light.gateway_light_f0b429b43088
-      - light.yeelight_strip_286c072f6ce6
-    states:
-      - state: 'on'
-        class: 'light-on'
-      - state: 'off'
-        class: 'light-off'
-    action:
-      service: toggle
-      
-  - name: Air_Conditioner
-    entities:
-      - climate.mi_acpartner
-    states:
-      - state: 'off'
-        class: 'ac-off'
-      - state: 'cool'
-        class: 'ac-on'
-      - state: 'auto'
-        class: 'ac-on'
-      - state: 'heat'
-        class: 'ac-on'
-
   - name: Tempreature_sensor
     entities:
       - sensor.temperature_158d00010e50d7
@@ -59,85 +34,50 @@ groups:
       else
         return "hum-high";
       '
-
-#  - name: Illumination_sensor
-#    entities:
-#      - sensor.illumination_f0b429b43088
-#    text_template: '${entity.state ? entity.state + " Lx": "unknown"}'
-#    class_template: '
-#      var lux = parseFloat(entity.state);
-#      if (lux < 100)
-#        return "lux-low";
-#      else if (lux < 800)
-#        return "lux-average";
-#      else
-#        return "lux-high";
-#      '
-
-  - name: Magic_mirror
+  - name: Lights
     entities:
-      - switch.plug_158d00011c85e2
+      - light.gateway_light_f0b429b43088
+#      - light.yeelight_strip_286c072f6ce6
     states:
       - state: 'on'
-        class: 'mirror-on'
+        class: 'light-on'
       - state: 'off'
-        class: 'mirror-off'
-    action:
-      domain: switch
-      service: toggle
-
-  - name: Family_members
-    entities:
-      - device_tracker.huawei
-      - device_tracker.chenxindeiphone
-      - device_tracker.iphone7
-    states:
-      - state: 'home'
-        class: 'at-home'
-      - state: 'not_home'
-        class: 'away'
-
-  - name: Media Players
-    entities:
-      - media_player.playstation_4
-    states:
-      - state: 'playing'
-        clase: 'ps4-playing'
-      - state: 'off'
-        class: 'ps4-off'
-      - state: 'idle'
-        class: 'ps4-on'
+        class: 'light-off'
     action:
       service: toggle
 
-  - name: Screen
+  - name: Plant
     entities:
-      - sensor.games
-    text_template: '${entity.state ? entity.state : "学习中"}'
-    class_template: 'screen'
+      - plant.coconut
+    text_template: '${entity.state ? entity.state: "unknown"}'
+    class_template: '
+      var plantStatus = entity.state;
+      if (plantStatus == "good")
+        return "healthy";
+      else
+        return "unhealthy";
+      '
+  - name: Sun
+    entities:
+      - sensor.sun_state
+    class_template: '
+      var sunRise = entity.state;
+      if (sunRise == "日落")
+        return "night";
+      else
+        return "daytime";
+      '
+  - name: Star
+    entities:
+      - sun.sun
+    class_template: '
+      var staring = entity.state;
+      if (staring == "below_horizon")
+        return "star";
+      else
+        return "staroff"
+      '
 
-  - name: Flower_moisture
-    entities:
-      - sensor.coconut_moisture
-    text_template: '${entity.state ? entity.state + " %": "unknown"}'
-    class_template: '
-      var soilHum = parseFloat(entity.state);
-      if (soilHum < 30)
-        return "unhealthy";
-      else
-        return "healthy";
-      '
-  - name: Flower_fertility
-    entities:
-      - sensor.coconut_conductivity
-    text_template: '${entity.state ? entity.state : "unknown"}'
-    class_template: '
-      var fertility = parseFloat(entity.state);
-      if (fertility < 360)
-        return "unhealthy";
-      else
-        return "healthy";
-      '
   - name: Moon
     entities:
       - sensor.moon
@@ -180,14 +120,3 @@ groups:
 
       return "/local/custom_ui/floorplan/images/moon/" + imageName + ".svg";
       '
-  - name: sleep
-    entities:
-      - scene.sleep
-    action:
-      service: turn_on
-      
-  - name: exit
-    entities:
-      - scene.exit
-    action:
-      service: turn_on
